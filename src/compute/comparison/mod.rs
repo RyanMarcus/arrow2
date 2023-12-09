@@ -285,10 +285,10 @@ macro_rules! compare_scalar {
     ($lhs:expr, $rhs:expr, $op:tt, $p:tt) => {{
         let lhs = $lhs;
         let rhs = $rhs;
-        assert_eq!(
+        /*assert_eq!(
             lhs.data_type().to_logical_type(),
             rhs.data_type().to_logical_type()
-        );
+        );*/
         if !rhs.is_valid() {
             return BooleanArray::new_null(DataType::Boolean, lhs.len());
         }

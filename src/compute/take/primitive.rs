@@ -1,3 +1,6 @@
+
+use std::arch::x86_64::__m256i;
+
 use crate::{
     array::{Array, PrimitiveArray},
     bitmap::{Bitmap, MutableBitmap},
