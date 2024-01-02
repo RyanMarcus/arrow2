@@ -324,3 +324,19 @@ fn test_nested() {
 
     assert_eq!(expected, result.as_ref());
 }
+
+#[test]
+fn test_take_string() {
+    let mut strs = Utf8Array::<i32>::from(vec![Some("this"), Some("is"), Some("a"), Some("test")]);
+    strs.set_validity(None);
+
+    let mut idxes = PrimitiveArray::<u64>::from_vec(vec![900, 0, 0, 1]);
+    
+    let mut mask = MutableBitmap::new();
+    mask.push(false);
+    mask.extend_constant(3, true);
+
+    idxes.set_validity(Some(mask.into()));
+
+    take(&strs, &idxes).unwrap();
+}

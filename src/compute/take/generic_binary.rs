@@ -86,7 +86,6 @@ pub fn take_indices_validity<O: Offset, I: Index>(
     indices: &PrimitiveArray<I>,
 ) -> (OffsetsBuffer<O>, Buffer<u8>, Option<Bitmap>) {
     let mut length = O::default();
-
     let offsets = offsets.buffer();
 
     let mut starts = Vec::<O>::with_capacity(indices.len());
