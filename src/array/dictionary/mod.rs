@@ -182,6 +182,17 @@ impl<K: DictionaryKey> DictionaryArray<K> {
     }
 
     /// Returns a new [`DictionaryArray`].
+    /// # Safety
+    /// The caller must ensure that every keys's values is represented in `usize` and is `< values.len()`
+    pub unsafe fn try_from_keys_unchecked(
+        keys: PrimitiveArray<K>,
+        values: Box<dyn Array>,
+    ) -> Result<Self, Error> {
+        let data_type = Self::default_data_type(values.data_type().clone());
+        Self::try_new_unchecked(data_type, keys, values)
+    }
+
+    /// Returns a new [`DictionaryArray`].
     /// # Errors
     /// This function errors iff
     /// * the `data_type`'s logical type is not a `DictionaryArray`
